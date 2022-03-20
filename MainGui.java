@@ -10,6 +10,11 @@ package poker;
  * @author charlotteolaniyi
  */
 public class MainGui extends javax.swing.JFrame {
+    boolean dealt=false;
+   
+
+
+    
 
     /**
      * Creates new form MainGui
@@ -37,16 +42,15 @@ public class MainGui extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        Fold = new javax.swing.JButton();
+        Call = new javax.swing.JButton();
+        Hold = new javax.swing.JButton();
+        Raise = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        aiWager = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,13 +73,10 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/3Hearts.png"))); // NOI18N
         jLabel7.setText("jLabel7");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AceClubs.png"))); // NOI18N
         jLabel8.setText("jLabel8");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/10Spades.png"))); // NOI18N
         jLabel9.setText("jLabel9");
 
         jButton3.setForeground(new java.awt.Color(51, 51, 255));
@@ -89,20 +90,33 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Hold");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Fold.setText("Fold");
+        Fold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                FoldActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Call");
+        Call.setText("Call");
+        Call.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CallActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Hold");
+        Hold.setText("Hold");
+        Hold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HoldActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("Raise");
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b1fv.png"))); // NOI18N
+        Raise.setText("Raise");
+        Raise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RaiseActionPerformed(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b1fv.png"))); // NOI18N
 
@@ -110,12 +124,17 @@ public class MainGui extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b1fv.png"))); // NOI18N
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/b1fv.png"))); // NOI18N
-
-        jTextField1.setText("Wager:##");
+        jTextField1.setText("P1 Wager:###");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
+            }
+        });
+
+        aiWager.setText("P2 Wager:###");
+        aiWager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aiWagerActionPerformed(evt);
             }
         });
 
@@ -138,38 +157,33 @@ public class MainGui extends javax.swing.JFrame {
                 .addGap(173, 173, 173)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel14))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(aiWager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(93, 93, 93))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(jButton5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel10)))
+                        .addGap(141, 141, 141)
+                        .addComponent(Fold)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton6)
+                        .addComponent(Call)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton7))
+                        .addComponent(Hold))
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +192,7 @@ public class MainGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton8)
+                        .addComponent(Raise)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,19 +203,19 @@ public class MainGui extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(aiWager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel13))
                 .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -209,10 +223,10 @@ public class MainGui extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(Fold)
+                    .addComponent(Call)
+                    .addComponent(Hold)
+                    .addComponent(Raise))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -236,8 +250,22 @@ public class MainGui extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+    if(dealt==false){
+       for(int i=0;i<3;i++){
+            Poker.dealerHand.add(Poker.d.deal());
+    }
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource(Poker.p1.addToHand(Poker.d.deal()).getImage())));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource(Poker.p1.addToHand(Poker.d.deal()).getImage())));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource(Poker.p1.addToHand(Poker.d.deal()).getImage())));
+
+       dealt=true;
+    }
+    else{
+}
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
@@ -247,13 +275,46 @@ public class MainGui extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void FoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_FoldActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void RaiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RaiseActionPerformed
+    if(Poker.playerTurn=true){
+      String initWager=jTextField1.getText();
+      int wager = Integer.parseInt(initWager);
+      Poker.p1.setWager(wager);
+      Poker.playerTurn=false;
+      Poker.aiTurn=true;
+//Call AI turn
+}
+      
+ //Poker.p1.setWager(jTextField1.get);        // TODO add your handling code here:
+    }//GEN-LAST:event_RaiseActionPerformed
+
+    private void aiWagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aiWagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aiWagerActionPerformed
+
+    private void HoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HoldActionPerformed
+        // TODO add your handling code here:
+        //AITurn
+    }//GEN-LAST:event_HoldActionPerformed
+
+    private void CallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CallActionPerformed
+        // TODO add your handling code here:
+        if(aiWager.getText().equals("P2 Wager:###")){
+             Poker.p1.setWager(1);
+            }else{
+Poker.p1.setWager(Integer.parseInt(aiWager.getText()));
+Poker.playerTurn=false;
+}
+
+    }//GEN-LAST:event_CallActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,19 +352,18 @@ public class MainGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Call;
+    private javax.swing.JButton Fold;
+    private javax.swing.JButton Hold;
+    private javax.swing.JButton Raise;
+    private javax.swing.JTextField aiWager;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;

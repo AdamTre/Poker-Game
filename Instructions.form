@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="1046" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="653" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" pref="53" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Return"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jTextArea1">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="Poker Instructions&#xa;To change the difficulty of the AI player, click the drop down box and select between easy, medium, or hard. Easy will be the&#xa;default selection if nothing else is picked.&#xa;&#xa;To begin playing, click the start button.&#xa;&#xa;You will then be asked to enter a starting wager.&#xa;&#xa;Once entered, you and the AI player will be both dealt 3 cards, and&#xa;additional cards will be dealt in the center of the screen as the center hand, with 2 cards faced up and the rest faced down.&#xa;The center hand acts as cards that both players have in their hand.&#xa;&#xa;&#xa;Four options will be availbe to you to select from by clicking on their respective button, each of which are explined below.&#xa;&#xa;Call: Pressing the Call button keeps your wager the same or raises your wager to whatever the AI player raised their wager&#xa;if they picked raise.&#xa;&#xa;Raise: Raises your amount wagered by the amount specified in the text below the Raise button.&#xa;&#xa;Hold: Passes your turn to the AI player&apos;s. After the AI player goes, it will be your turn again, and you cannot pick the Hold&#xa;option for the rest of the current betting round.&#xa;&#xa;Fold: Foldng will have you stop betting ending the current game, and give the AI player your current wager, with them as the&#xa;winner.&#xa;&#xa;Once you and the AI player have both picked an option and have matched wagers, the current betting round will end and one of&#xa;the three face down cards will be faced up. Then a new betting round will begin. This cycle continues until all cards in the&#xa;center hand are faced up.&#xa;&#xa;Because of this, the showdown round will now begin, where both players will reveal their hands to each other, and the player&#xa;with the highest valued hand will be declared the winner and will keep their wager and gain the opposing player&apos;s waged money.&#xa;&#xa;Two options will then be presented to you, Rematch and Quit.&#xa;Clicking Rematch will allow you to challenge the AI player to another game of poker with the money earned from the previous game &#xa;added.&#xa;Clicking Quit will exit the program.&#xa;&#xa;"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
