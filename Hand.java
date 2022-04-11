@@ -12,12 +12,14 @@ import java.util.ArrayList;
  */
 public class Hand {
     private ArrayList<Card> hand = new ArrayList<Card>();
+    private int score;
 
     public Hand(){
 
     }   
 
 public Hand(ArrayList<Card> h){
+    score=0;
     h=hand;
     }   
 
@@ -95,6 +97,7 @@ public void swap(int source, int dest){
 public boolean isFlush(){
      
         sortBySuit();
+    score+=6;
         return(hand.get(0).getSuit()==hand.get(hand.size()-1).getSuit());
 }
 
@@ -121,12 +124,13 @@ if(hand.get(i).getValue() != testValue)
 
     testValue++;
 }
-
+score+=6;
 return (true);
 }
 }
 
 public boolean isRoyalFlush(){
+score+=7;
 return isStraight() && isFlush();
 }
 
@@ -134,6 +138,7 @@ public boolean is4OfAKind(){
  sortByValue();
     if(hand.get(0).getValue()==hand.get(3).getValue()||hand.get(1).getValue()==hand.get(4).getValue()
         ||hand.get(2).getValue()==hand.get(5).getValue()){
+    score+=4;
    return true;
     }else{
     return false;
@@ -145,7 +150,9 @@ public boolean is3OfAKind(){
  sortByValue();
     if(hand.get(0).getValue()==hand.get(2).getValue()||hand.get(1).getValue()==hand.get(3).getValue()
         ||hand.get(2).getValue()==hand.get(4).getValue()||hand.get(3).getValue()==hand.get(5).getValue()){
-    return true;
+      score+=3;
+      return true;
+
     }else{
     return false;
         }
@@ -159,15 +166,27 @@ sortByValue();
         for(int j=i+1;j<hand.size();j++){
 if(hand.get(i).getValue()==hand.get(j).getValue());
 pairs++;
+score++;
 }
 }
         return pairs;
 }
 
 public boolean isFullHouse(){
+score+=5;
 return containsPairs()>0&&is3OfAKind();
 
 
+}
+
+public int compareTo(Hand h){
+if(score<h.score){
+    return -1;
+}else if(score>h.score){
+    return 1;
+}else{
+    return 0;
+}
 }
 
 

@@ -17,7 +17,7 @@ public class Player {
     private Hand hand;
 
 public Player(){
-money=100;
+money=1000;
 wager=0;
 hand=new Hand();
 }
@@ -37,12 +37,12 @@ return wager;
 }
 
 public int moneyGained(int i){
-    money+=wager;
+    money+=i;
     return money;
 }
 
 public int moneyLost(int i){
-    money-=wager;
+    money-=i;
     return money;
 }
 
