@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package poker;
 
 import java.util.ArrayList;
 
@@ -34,6 +29,11 @@ while(!hand.isEmpty()){
        
 }
 
+public int resetScore(){
+score=0;
+return score;
+}
+
 public Card addToHand(Card c){
   hand.add(c);
 
@@ -50,55 +50,52 @@ if(i<0||i>=hand.size()){
 }
 
 public void sortBySuit(){
-    int smallNum=0;
-    int j=0;
-    int index=0;
+    for(int i=0;i<hand.size()-1;i++){   
+       int index = i;
+             for(int j=i+1;j<hand.size();j++)
+     if(hand.get(j).getSuit()<hand.get(index).getSuit())
+                index=j;
 
-    for(int i=1;i<hand.size();i++){
-        smallNum = hand.get(i-1).getSuit();
-        index = i-1;
 
-             for(j=i;j<hand.size();j++){
-               if(hand.get(j).getSuit()<smallNum){
-                smallNum = hand.get(j).getSuit();
-        }
-    }
-          swap(i-1, index);
+Card min=hand.get(index);
+hand.set(index, hand.get(i));
+hand.set(i, min);
+    
+       //   swap(i-1, index);
     }
 }
 
 
 
 public void sortByValue(){
-    int smallNum=0;
-    int j=0;
-    int index=0;
 
-    for(int i=1;i<hand.size();i++){
-        smallNum = hand.get(i-1).getValue();
-        index = i-1;
+    for(int i=0;i<hand.size()-1;i++){   
+       int index = i;
+             for(int j=i+1;j<hand.size();j++)
+     if(hand.get(j).getValue()<hand.get(index).getValue())
+                index=j;
 
-             for(j=i;j<hand.size();j++){
-               if(hand.get(j).getValue()<smallNum){
-                smallNum = hand.get(j).getValue();
-        }
-    }
-          swap(i-1, index);
+
+Card min=hand.get(index);
+hand.set(index, hand.get(i));
+hand.set(i, min);
+    
+       //   swap(i-1, index);
     }
 }
 
-public void swap(int source, int dest){
-    Card temp = hand.get(dest);
-    hand.set(dest, hand.get(source));
-    hand.set(source, temp);
-}
+
 
 
 public boolean isFlush(){
      
         sortBySuit();
-    score+=6;
-        return(hand.get(0).getSuit()==hand.get(hand.size()-1).getSuit());
+if(hand.get(0).getSuit()==hand.get(hand.size()-1).getSuit()){
+
+    
+    return true;
+}else return false;
+        
 }
 
 public boolean isStraight(){
@@ -108,11 +105,13 @@ sortByValue();
 //If hand contains an Ace
   if(hand.get(5).getValue()==12){
      boolean a = hand.get(0).getValue()==0 && hand.get(1).getValue()==1
-            && hand.get(2).getValue()==2 && hand.get(3).getValue()==3;
+            && hand.get(2).getValue()==2 && hand.get(3).getValue()==3&& hand.get(4).getValue()==4;
 
-     boolean b = hand.get(1).getValue()==10 && hand.get(2).getValue()==11
-             && hand.get(3).getValue()==12 && hand.get(4).getValue()==13;
+     boolean b = hand.get(0).getValue()==7&& hand.get(1).getValue()==8 && hand.get(2).getValue()==9
+             && hand.get(3).getValue()==10 && hand.get(4).getValue()==11;
+if(a==true||b==true){
 
+}
      return(a||b);
 
 }else{
@@ -121,24 +120,35 @@ sortByValue();
     for(i=1;i<hand.size();i++){
 if(hand.get(i).getValue() != testValue)
     return (false);
-
-    testValue++;
+testValue++;
+   
 }
-score+=6;
+
 return (true);
 }
 }
 
+
+public boolean isStraightFlush(){
+if(isStraight() && isFlush()){
+
+return true;
+}else return false;
+
+}
 public boolean isRoyalFlush(){
-score+=7;
-return isStraight() && isFlush();
+if(isStraightFlush()&&hand.get(0).getValue()==7){
+
+return true;
+}else return false;
+
 }
 
 public boolean is4OfAKind(){
  sortByValue();
     if(hand.get(0).getValue()==hand.get(3).getValue()||hand.get(1).getValue()==hand.get(4).getValue()
         ||hand.get(2).getValue()==hand.get(5).getValue()){
-    score+=4;
+    
    return true;
     }else{
     return false;
@@ -150,7 +160,6 @@ public boolean is3OfAKind(){
  sortByValue();
     if(hand.get(0).getValue()==hand.get(2).getValue()||hand.get(1).getValue()==hand.get(3).getValue()
         ||hand.get(2).getValue()==hand.get(4).getValue()||hand.get(3).getValue()==hand.get(5).getValue()){
-      score+=3;
       return true;
 
     }else{
@@ -160,36 +169,74 @@ public boolean is3OfAKind(){
     }
 
 public int containsPairs(){
-    int pairs=0;
 sortByValue();
-    for(int i=0;i<hand.size();i++){
-        for(int j=i+1;j<hand.size();j++){
-if(hand.get(i).getValue()==hand.get(j).getValue());
-pairs++;
-score++;
+int pairs=0;
+for(int i=0;i<hand.size()-1;i++){
+    if(hand.get(i).getValue()==hand.get(i+1).getValue()){
+     if(i==hand.size()-2){
+      pairs++;
+        }else if(hand.get(i+2).getValue()==hand.get(i).getValue()){
+
+        }else
+      pairs++;
 }
-}
-        return pairs;
+    }
+
+return pairs;
 }
 
 public boolean isFullHouse(){
-score+=5;
+ if(containsPairs()>1&&is3OfAKind()&&is4OfAKind()==false){
+return true;
+}else
 return containsPairs()>0&&is3OfAKind();
 
 
 }
 
+public int calcScore(){
+
+    boolean flush=isFlush();
+    boolean full=isFullHouse();
+    boolean straight=isStraight();
+    int p=containsPairs();
+    boolean three=is3OfAKind();
+    boolean four=is4OfAKind();
+    boolean royal= isRoyalFlush();
+    boolean sFlush=isStraightFlush();
+
+    score+=(p*2);
+    if(flush) score+=6;
+    if(full) score+=7;
+    if(straight) score+=5;
+    if(three) score+=4;
+    if(four) score+=8;
+    if(royal) score+=10;
+    if(sFlush) score+=9;
+
+    return score;
+
+}
+
 public int compareTo(Hand h){
+System.out.println(calcScore());
+System.out.println(h.calcScore());
+
 if(score<h.score){
+resetScore();
+h.resetScore();
     return -1;
 }else if(score>h.score){
+resetScore();
+h.resetScore();
     return 1;
 }else{
+resetScore();
+h.resetScore();
     return 0;
 }
 }
 
 
 }
-
 

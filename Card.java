@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package poker;
+
 
 public class Card {
     
@@ -40,7 +36,7 @@ return cardInfo;
 
 public String getImage(){
 
-return "/images/"+cardValue[value]+cardSuit[suit]+".png";
+return "/"+cardValue[value]+cardSuit[suit]+".png";
 }
 
 

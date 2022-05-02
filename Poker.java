@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poker;
+
 
 import java.util.ArrayList;
 
@@ -28,23 +28,34 @@ public void Poker(){
 public int getRound(){
 return round;
 }
-public void startNewGame(){
+public synchronized void startNewGame(){
     d=new Deck();
+p1.getHand().clearHand();
+p2.getHand().clearHand();
+dealerHand.clearHand();
     d.shuffle();
     p1.setWager(0);
     p2.setWager(0);
     //so the game doesn't end we are assuming the ai has infinite money
     p2.moneyGained(9999);
     round=0;
-dealerHand.addToHand(d.deal());
+
 
     for(int i=0;i<3;i++){
         p1.getHand().addToHand(d.deal());
+       
         p2.getHand().addToHand(d.deal());
+   
+        dealerHand.addToHand(d.deal());
+    
+        }
+//have to do tis instead of in the for loop above so the cards that are in the dealer's hand aren't displayed twice in p1 and p2's hand in the gui.
+ for(int i=0;i<3;i++){
+       p1.getHand().addToHand(dealerHand.getCard(i));
+       p2.getHand().addToHand(dealerHand.getCard(i));
         }
 
-p1.getHand().addToHand(dealerHand.getCard(0));
-p2.getHand().addToHand(dealerHand.getCard(0));
+
 
     playerTurn=true;
     aiTurn=true;
@@ -55,9 +66,6 @@ return dealerHand;
 public void startNewRound(){
 round++;
 System.out.println(round);
-Card c= dealerHand.addToHand(d.deal());
-p1.getHand().addToHand(c);
-p2.getHand().addToHand(c);
     playerTurn=true;
     aiTurn=true;
 }
@@ -81,6 +89,8 @@ aiTurn=b;
 
 public void Fold(){
 ///
+p1.getHand().resetScore();
+p2.getHand().resetScore();
 startNewGame();
 
 }
@@ -131,23 +141,15 @@ return false;
 
 
 public int getWinner(){
-int result= p1.getHand().compareTo(p2.getHand());
-if(result==0){
-
-}else if(result==1){
-p1.moneyGained(p1.getMoney()+p2.getWager());
-}else{
-p1.moneyLost(p1.getMoney()-p1.getWager());
-}
-
-
-
-
-
-
-
-return result;
-}
+    int result= p1.getHand().compareTo(p2.getHand());
+        if(result==0){
+            }else if(result==1){
+                p1.moneyGained(p2.getWager());
+            }else{
+                p1.moneyLost(p1.getWager());
+        }
+    return result;
+    }
 /*
 
     public static void main(String[] args) {
@@ -167,4 +169,3 @@ dealerHand.
 
     
 }
-
